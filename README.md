@@ -36,6 +36,22 @@ php artisan serve
 
 Aplikasi akan tersedia di `http://127.0.0.1:8000`.
 
+## Seeding Database
+
+Gunakan salah satu opsi berikut untuk mengisi data awal:
+
+```bash
+# Mengisi data setelah migrasi
+php artisan db:seed
+
+# Atau: reset semua tabel lalu seeding
+php artisan migrate:fresh --seed
+```
+
+Tips:
+- Pastikan koneksi database di `.env` sudah benar sebelum menjalankan seeding.
+- Anda bisa menambahkan atau mengubah seeder di `database/seeders` sesuai kebutuhan.
+
 ## Catatan
 
 - Upload lampiran disimpan di `public/uploads` secara langsung, tidak perlu `storage:link`.

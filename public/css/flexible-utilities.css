@@ -1,0 +1,428 @@
+/* 
+ * Additional Flexbox & Grid Utilities
+ * Enhanced flexibility for Journey Template
+ */
+
+/* ===================================
+   Flexible Grid System
+   =================================== */
+
+.tm-grid {
+    display: grid;
+    gap: 20px;
+}
+
+/* Grid Auto-fit Pattern */
+.tm-grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.tm-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.tm-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.tm-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media screen and (max-width: 991px) {
+    .tm-grid-4,
+    .tm-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .tm-grid-4,
+    .tm-grid-3,
+    .tm-grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===================================
+   Flexible Spacing
+   =================================== */
+
+/* Responsive Padding */
+.tm-section-pad {
+    padding: 60px 20px;
+}
+
+@media screen and (max-width: 767px) {
+    .tm-section-pad {
+        padding: 40px 15px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .tm-section-pad {
+        padding: 30px 10px;
+    }
+}
+
+/* Responsive Margins */
+.tm-mb-responsive {
+    margin-bottom: 40px;
+}
+
+@media screen and (max-width: 767px) {
+    .tm-mb-responsive {
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .tm-mb-responsive {
+        margin-bottom: 20px;
+    }
+}
+
+/* ===================================
+   Flexible Typography
+   =================================== */
+
+.tm-heading-responsive {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    line-height: 1.2;
+}
+
+.tm-subheading-responsive {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    line-height: 1.3;
+}
+
+.tm-text-responsive {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    line-height: 1.6;
+}
+
+/* ===================================
+   Flexible Images
+   =================================== */
+
+.tm-img-fluid {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.tm-img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tm-img-contain {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ===================================
+   Flexible Containers
+   =================================== */
+
+.tm-container-fluid {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tm-container-sm {
+    max-width: 576px;
+}
+
+.tm-container-md {
+    max-width: 768px;
+}
+
+.tm-container-lg {
+    max-width: 992px;
+}
+
+.tm-container-xl {
+    max-width: 1200px;
+}
+
+/* ===================================
+   Flexible Form Elements
+   =================================== */
+
+.tm-form-responsive {
+    width: 100%;
+}
+
+.tm-form-group-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+@media screen and (min-width: 768px) {
+    .tm-form-group-responsive.tm-form-half {
+        width: calc(50% - 10px);
+        display: inline-block;
+    }
+    
+    .tm-form-group-responsive.tm-form-half:nth-child(even) {
+        margin-left: 20px;
+    }
+}
+
+/* ===================================
+   Flexible Navigation
+   =================================== */
+
+.tm-nav-responsive {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.tm-nav-item-responsive {
+    flex: 0 1 auto;
+}
+
+@media screen and (max-width: 575px) {
+    .tm-nav-responsive {
+        flex-direction: column;
+    }
+    
+    .tm-nav-item-responsive {
+        width: 100%;
+    }
+}
+
+/* ===================================
+   Card System
+   =================================== */
+
+.tm-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tm-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.tm-card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.tm-card-body {
+    padding: 20px;
+}
+
+.tm-card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.tm-card-text {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+@media screen and (max-width: 575px) {
+    .tm-card-body {
+        padding: 15px;
+    }
+    
+    .tm-card-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* ===================================
+   Flexible Buttons
+   =================================== */
+
+.tm-btn-responsive {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 575px) {
+    .tm-btn-responsive {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 0.95rem;
+    }
+}
+
+/* ===================================
+   Utility Classes
+   =================================== */
+
+.tm-hidden-mobile {
+    display: block;
+}
+
+@media screen and (max-width: 767px) {
+    .tm-hidden-mobile {
+        display: none;
+    }
+}
+
+.tm-hidden-desktop {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .tm-hidden-desktop {
+        display: block;
+    }
+}
+
+.tm-text-center-mobile {
+    text-align: left;
+}
+
+@media screen and (max-width: 767px) {
+    .tm-text-center-mobile {
+        text-align: center;
+    }
+}
+
+.tm-full-width-mobile {
+    width: auto;
+}
+
+@media screen and (max-width: 767px) {
+    .tm-full-width-mobile {
+        width: 100%;
+    }
+}
+
+/* ===================================
+   Aspect Ratio Containers
+   =================================== */
+
+.tm-aspect-ratio {
+    position: relative;
+    width: 100%;
+}
+
+.tm-aspect-ratio::before {
+    content: "";
+    display: block;
+}
+
+.tm-aspect-ratio-16-9::before {
+    padding-top: 56.25%;
+}
+
+.tm-aspect-ratio-4-3::before {
+    padding-top: 75%;
+}
+
+.tm-aspect-ratio-1-1::before {
+    padding-top: 100%;
+}
+
+.tm-aspect-ratio > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===================================
+   Overflow Utilities
+   =================================== */
+
+.tm-overflow-hidden {
+    overflow: hidden;
+}
+
+.tm-overflow-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ===================================
+   Animation Utilities
+   =================================== */
+
+@keyframes tm-fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes tm-slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.tm-fade-in {
+    animation: tm-fadeIn 0.6s ease-in-out;
+}
+
+.tm-slide-up {
+    animation: tm-slideUp 0.6s ease-in-out;
+}
+
+/* ===================================
+   Loading States
+   =================================== */
+
+.tm-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.tm-loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    margin-left: -15px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #69c6ba;
+    border-radius: 50%;
+    animation: tm-spin 1s linear infinite;
+}
+
+@keyframes tm-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

@@ -1,0 +1,64 @@
+/* Full Screen Layout Override */
+
+body {
+    background: white !important;
+    margin: 0;
+    padding: 0;
+}
+
+.tm-page-wrap {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+}
+
+.tm-container-outer {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.tm-main-content {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Keep container for content inside sections */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Full width banner */
+.tm-banner-bg {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Full width top bar */
+.tm-top-bar {
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+.tm-top-bar-bg {
+    width: 100%;
+}
+
+/* Full width sections */
+.tm-slideshow-section,
+.tm-bg-gray {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Ensure footer is full width */
+footer.tm-container-outer {
+    width: 100%;
+    max-width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}

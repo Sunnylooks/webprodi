@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Test - Journey Template</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #69c6ba;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #69c6ba;
+        }
+        
+        .test-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .test-section p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .breakpoint-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #69c6ba;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 9999;
+        }
+        
+        .breakpoint-indicator::before {
+            content: 'Desktop (≥1200px)';
+        }
+        
+        @media screen and (max-width: 1199px) {
+            .breakpoint-indicator::before {
+                content: 'Large (992px - 1199px)';
+            }
+        }
+        
+        @media screen and (max-width: 991px) {
+            .breakpoint-indicator::before {
+                content: 'Medium (768px - 991px)';
+            }
+        }
+        
+        @media screen and (max-width: 767px) {
+            .breakpoint-indicator::before {
+                content: 'Small (576px - 767px)';
+            }
+        }
+        
+        @media screen and (max-width: 575px) {
+            .breakpoint-indicator::before {
+                content: 'Mobile (<576px)';
+            }
+        }
+        
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .checklist li:before {
+            content: '✓ ';
+            color: #69c6ba;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .btn-test {
+            display: inline-block;
+            background: #69c6ba;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 10px 10px 0;
+            transition: all 0.3s;
+        }
+        
+        .btn-test:hover {
+            background: #c66995;
+            transform: translateY(-2px);
+        }
+        
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .grid-item {
+            background: #69c6ba;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        
+        @media screen and (max-width: 575px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .test-section {
+                padding: 15px;
+            }
+            
+            .btn-test {
+                display: block;
+                width: 100%;
+                text-align: center;
+                margin: 10px 0;
+            }
+        }
+        
+        .screen-size {
+            background: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .screen-size span {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #69c6ba;
+        }
+    </style>
+</head>
+<body>
+    <div class="breakpoint-indicator"></div>
+    
+    <div class="container">
+        <h1>🎯 Responsive UI Testing - Journey Template</h1>
+        
+        <div class="screen-size">
+            Current Screen: <span id="screenWidth">0</span>px × <span id="screenHeight">0</span>px
+        </div>
+        
+        <div class="test-section">
+            <h2>✅ Responsive Features Implemented</h2>
+            <ul class="checklist">
+                <li>Mobile-first approach dengan breakpoints optimal</li>
+                <li>Flexible navigation dengan hamburger menu (< 991px)</li>
+                <li>Responsive typography menggunakan clamp()</li>
+                <li>Grid system yang adaptive (1-4 kolom)</li>
+                <li>Touch-friendly buttons (min 44x44px)</li>
+                <li>Optimized forms untuk mobile devices</li>
+                <li>Responsive images dengan aspect ratio</li>
+                <li>Landscape orientation support</li>
+                <li>Print styles untuk printing</li>
+                <li>Accessibility improvements (keyboard nav, reduced motion)</li>
+            </ul>
+        </div>
+        
+        <div class="test-section">
+            <h2>📱 Testing Instructions</h2>
+            <p><strong>Desktop Browser:</strong></p>
+            <ol style="margin-left: 20px; color: #666;">
+                <li>Tekan <code>F12</code> untuk membuka DevTools</li>
+                <li>Klik icon <strong>Toggle Device Toolbar</strong> (atau <code>Ctrl+Shift+M</code>)</li>
+                <li>Pilih device preset atau resize manual</li>
+                <li>Test berbagai orientasi (portrait/landscape)</li>
+            </ol>
+            
+            <p style="margin-top: 20px;"><strong>Mobile Device:</strong></p>
+            <p>Buka website di smartphone/tablet Anda dan test:</p>
+            <ul style="margin-left: 20px; color: #666;">
+                <li>Portrait mode</li>
+                <li>Landscape mode</li>
+                <li>Touch interactions</li>
+                <li>Form inputs</li>
+            </ul>
+        </div>
+        
+        <div class="test-section">
+            <h2>📏 Breakpoints</h2>
+            <div style="margin-top: 15px;">
+                <div style="background: white; padding: 15px; border-radius: 5px; margin-bottom: 10px;">
+                    <strong>📱 Mobile Portrait:</strong> &lt; 576px<br>
+                    <span style="color: #666;">1 kolom, stack semua elemen, full-width buttons</span>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 5px; margin-bottom: 10px;">
+                    <strong>📱 Mobile Landscape / Small Tablet:</strong> 576px - 767px<br>
+                    <span style="color: #666;">2 kolom untuk cards, responsive forms</span>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 5px; margin-bottom: 10px;">
+                    <strong>📱 Tablet:</strong> 768px - 991px<br>
+                    <span style="color: #666;">2-3 kolom, collapsible navigation</span>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 5px; margin-bottom: 10px;">
+                    <strong>💻 Laptop:</strong> 992px - 1199px<br>
+                    <span style="color: #666;">Full layout, desktop navigation</span>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 5px;">
+                    <strong>🖥️ Desktop:</strong> ≥ 1200px<br>
+                    <span style="color: #666;">Maximum layout, all features visible</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🔗 Quick Links</h2>
+            <a href="/" class="btn-test">View Journey Template</a>
+            <a href="#" class="btn-test" onclick="window.resizeTo(375, 667); return false;">iPhone Size (375×667)</a>
+            <a href="#" class="btn-test" onclick="window.resizeTo(768, 1024); return false;">iPad Size (768×1024)</a>
+            <a href="#" class="btn-test" onclick="window.resizeTo(1440, 900); return false;">Desktop (1440×900)</a>
+        </div>
+        
+        <div class="test-section">
+            <h2>🎨 Grid System Demo</h2>
+            <p>Resize browser untuk melihat grid responsive:</p>
+            <div class="grid-demo">
+                <div class="grid-item">Item 1</div>
+                <div class="grid-item">Item 2</div>
+                <div class="grid-item">Item 3</div>
+                <div class="grid-item">Item 4</div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📚 Documentation</h2>
+            <p>File dokumentasi tersedia di:</p>
+            <ul style="margin-left: 20px; color: #666; margin-top: 10px;">
+                <li><code>RESPONSIVE_GUIDE.md</code> - Panduan lengkap responsive design</li>
+                <li><code>RESPONSIVE_CHANGES.txt</code> - Ringkasan perubahan</li>
+                <li><code>public/css/responsive-improvements.css</code> - CSS responsive utama</li>
+                <li><code>public/css/flexible-utilities.css</code> - Utility classes</li>
+            </ul>
+        </div>
+        
+        <div class="test-section">
+            <h2>⚡ Performance Tips</h2>
+            <ul style="margin-left: 20px; color: #666;">
+                <li>Gunakan WebP format untuk images</li>
+                <li>Enable lazy loading untuk images</li>
+                <li>Minify CSS & JS untuk production</li>
+                <li>Use CDN untuk static assets</li>
+                <li>Enable browser caching</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f0f0f0; border-radius: 5px;">
+            <p style="color: #666;">Template ini sekarang fully responsive dan mobile-friendly! 🎉</p>
+            <p style="color: #999; margin-top: 10px; font-size: 0.9rem;">Resize browser Anda untuk melihat perubahan responsive</p>
+        </div>
+    </div>
+    
+    <script>
+        function updateScreenSize() {
+            document.getElementById('screenWidth').textContent = window.innerWidth;
+            document.getElementById('screenHeight').textContent = window.innerHeight;
+        }
+        
+        updateScreenSize();
+        window.addEventListener('resize', updateScreenSize);
+    </script>
+</body>
+</html>

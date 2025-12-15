@@ -6,8 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\ProgramController as AdminProgramController;
 use App\Http\Controllers\Admin\ProgramPageController as AdminProgramPageController;
 
-// Root langsung ke prodi default
-Route::get('/', [PortalController::class, 'redirectToDefault']);
+// Root ke portal
+Route::get('/', [PortalController::class, 'portal'])->middleware('auth');
 
 // Auth
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -18,8 +18,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/p/{programSlug}', [PortalController::class, 'program']);
 Route::get('/p/{programSlug}/{pageSlug}', [PortalController::class, 'subpage']);
 
-// Admin (hanya kaprodi/superadmin)
-Route::middleware('role:kaprodi,program')->group(function () {
+// Admin (kaprodi dan superadmin dapat mengakses dashboard admin)
+Route::middleware('role:admin')->group(function () {
     Route::get('/admin', function () { return view('admin.index'); });
     Route::get('/admin/programs', [AdminProgramController::class, 'index']);
     Route::get('/admin/programs/create', [AdminProgramController::class, 'create']);

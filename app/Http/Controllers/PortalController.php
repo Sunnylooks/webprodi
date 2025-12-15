@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class PortalController extends Controller
 {
+    public function portal()
+    {
+        $programs = Program::orderBy('name')->get();
+        return view('portal.index', compact('programs'));
+    }
+
     public function redirectToDefault()
     {
         $program = Program::orderBy('name')->first();
@@ -19,7 +25,7 @@ class PortalController extends Controller
 
     public function index()
     {
-        return $this->redirectToDefault();
+        return $this->portal();
     }
 
     public function program(string $programSlug)

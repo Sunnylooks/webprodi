@@ -375,7 +375,7 @@
         }
     }
 
-    /* Print Styles */
+    
     @media print {
         .btn-logout {
             display: none;

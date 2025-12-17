@@ -5,6 +5,7 @@ use App\Http\Controllers\PortalController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\ProgramController as AdminProgramController;
 use App\Http\Controllers\Admin\ProgramPageController as AdminProgramPageController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 // Root langsung ke prodi default
 Route::get('/', [PortalController::class, 'redirectToDefault']);
@@ -17,6 +18,16 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Portal per prodi
 Route::get('/p/{programSlug}', [PortalController::class, 'program']);
 Route::get('/p/{programSlug}/{pageSlug}', [PortalController::class, 'subpage']);
+
+// Admin (hanya superadmin untuk users management)
+Route::middleware('role:superadmin')->group(function () {
+    Route::get('/admin/users', [AdminUserController::class, 'index']);
+    Route::get('/admin/users/create', [AdminUserController::class, 'create']);
+    Route::post('/admin/users', [AdminUserController::class, 'store']);
+    Route::get('/admin/users/{id}/edit', [AdminUserController::class, 'edit']);
+    Route::put('/admin/users/{id}', [AdminUserController::class, 'update']);
+    Route::delete('/admin/users/{id}', [AdminUserController::class, 'destroy']);
+});
 
 // Admin (hanya kaprodi/superadmin)
 Route::middleware('role:kaprodi,program')->group(function () {

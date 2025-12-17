@@ -55,9 +55,11 @@
                         </button>
                         <div id="mainNav" class="collapse navbar-collapse tm-bg-white">
                             <ul class="navbar-nav ml-auto">
-                                @php($allPrograms = \App\Models\Program::orderBy('name')->get())
+                                @php
+                                    $allPrograms = \App\Models\Program::orderBy('name')->get();
+                                @endphp
                                 @if($allPrograms->count())
-                                <li class="nav-item dropdown">
+                                <li class="nav-item dropdown nav-prodi-dropdown">
                                     <a class="nav-link dropdown-toggle {{ Request::is('p/*') ? 'active' : '' }}" href="#" id="prodiDropdown" role="button" data-toggle="dropdown">
                                         Program Studi
                                     </a>
@@ -68,14 +70,26 @@
                                     </div>
                                 </li>
                                 @endif
-                                @if(isset($nav) && isset($program))
-                                    @foreach($nav as $category => $items)
+                                @if(isset($nav) && isset($program) && isset($categories))
+                                    @foreach($categories as $category)
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">{{ $category }}</a>
+                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                @if($category->icon)
+                                                    <i class="fa {{ $category->icon }}"></i> 
+                                                @endif
+                                                {{ $category->name }}
+                                            </a>
                                             <div class="dropdown-menu">
-                                                @foreach($items as $it)
-                                                    <a class="dropdown-item" href="{{ url('/p/'.$program->slug.'/'.$it->slug) }}">{{ $it->title }}</a>
-                                                @endforeach
+                                                @php
+                                                    $categoryPages = isset($nav[$category->name]) ? $nav[$category->name] : collect();
+                                                @endphp
+                                                @if($categoryPages->count())
+                                                    @foreach($categoryPages as $it)
+                                                        <a class="dropdown-item" href="{{ url('/p/'.$program->slug.'/'.$it->slug) }}">{{ $it->title }}</a>
+                                                    @endforeach
+                                                @else
+                                                    <span class="dropdown-item text-muted">Belum ada konten</span>
+                                                @endif
                                             </div>
                                         </li>
                                     @endforeach
@@ -85,15 +99,15 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ url('/admin') }}">Admin</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <form method="POST" action="{{ route('logout') }}">
-                                                @csrf
-                                                <button class="nav-link btn btn-link" type="submit">Logout</button>
-                                            </form>
-                                        </li>
                                     @endif
+                                    <li class="nav-item">
+                                        <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
+                                            @csrf
+                                            <button class="nav-link btn btn-link" type="submit" style="color: #fff; text-decoration: none;">Logout</button>
+                                        </form>
+                                    </li>
                                 @else
-                                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                                    <li class="nav-item nav-login-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                                 @endauth
                             </ul>
                         </div>                            

@@ -50,7 +50,8 @@
                 </a>
             @endforeach
 
-            {{-- Admin Card --}}
+            {{-- Admin Card - hanya untuk superadmin dan kaprodi --}}
+            @if(in_array(auth()->user()->role, ['superadmin', 'kaprodi']))
             <a href="/admin" class="card-link">
                 <div class="program-card admin-card">
                     <div class="card-image">
@@ -68,6 +69,7 @@
                     </div>
                 </div>
             </a>
+            @endif
         </div>
     </div>
 </section>

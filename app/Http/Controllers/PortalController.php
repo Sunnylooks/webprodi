@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Program;
 use App\Models\ProgramPage;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class PortalController extends Controller
@@ -32,8 +33,9 @@ class PortalController extends Controller
     {
         $program = Program::where('slug', $programSlug)->firstOrFail();
         $pages = $program->pages()->where('is_published', true)->get();
+        $categories = Category::where('program_id', $program->id)->orderBy('sort_order')->orderBy('name')->get();
         $nav = $pages->groupBy('category');
-        return view('program.home', compact('program', 'nav'));
+        return view('program.home', compact('program', 'nav', 'categories'));
     }
 
     public function subpage(string $programSlug, string $pageSlug)
@@ -45,7 +47,8 @@ class PortalController extends Controller
             ->with('attachments')
             ->firstOrFail();
         $pages = $program->pages()->where('is_published', true)->get();
+        $categories = Category::where('program_id', $program->id)->orderBy('sort_order')->orderBy('name')->get();
         $nav = $pages->groupBy('category');
-        return view('program.subpage', compact('program', 'page', 'nav'));
+        return view('program.subpage', compact('program', 'page', 'nav', 'categories'));
     }
 }

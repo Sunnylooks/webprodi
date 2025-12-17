@@ -99,43 +99,8 @@
                             <i class="fa fa-align-left" style="color: #667eea; margin-right: 0.5rem;"></i> Konten
                         </label>
                         <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="contentInput" rows="8" placeholder="Masukkan konten subpage..." style="border-radius: 8px; border: 1px solid #e2e8f0; padding: 0.75rem; font-size: 0.95rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">{{ old('content', $page->content) }}</textarea>
+                        <small class="text-muted" style="margin-top: 0.25rem; display: block;"><i class="fa fa-info-circle"></i> Gunakan editor untuk menulis konten dan upload gambar/video/PDF langsung di dalam konten</small>
                         @error('content')
-                            <small class="text-danger" style="margin-top: 0.25rem; display: block;"><i class="fa fa-times-circle"></i> {{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <!-- Lampiran Saat Ini -->
-                    @if($page->attachments->count() > 0)
-                        <div class="mb-4">
-                            <label class="form-label" style="font-weight: 500; color: #2d3748; margin-bottom: 0.75rem;">
-                                <i class="fa fa-paperclip" style="color: #f6ad55; margin-right: 0.5rem;"></i> Lampiran Saat Ini
-                            </label>
-                            <div style="background-color: #f7fafc; border: 1px dashed #cbd5e0; border-radius: 8px; padding: 1rem;">
-                                @foreach($page->attachments as $att)
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="checkbox" name="remove_attachments[]" value="{{ $att->id }}" id="att{{ $att->id }}">
-                                        <label class="form-check-label" for="att{{ $att->id }}" style="margin-left: 0.5rem; color: #2d3748;">
-                                            <i class="fa fa-file"></i> {{ $att->original_name }}
-                                            <span class="badge bg-secondary" style="margin-left: 0.5rem;">{{ number_format(($att->size ?? 0)/1024, 1) }} KB</span>
-                                            <a href="/{{ $att->file_path }}" target="_blank" class="ms-2" style="color: #667eea; text-decoration: none;">
-                                                <i class="fa fa-external-link-alt"></i> Lihat
-                                            </a>
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                            <small class="text-muted" style="margin-top: 0.25rem; display: block;"><i class="fa fa-info-circle"></i> Centang untuk menghapus lampiran</small>
-                        </div>
-                    @endif
-
-                    <!-- Tambah Lampiran -->
-                    <div class="mb-4">
-                        <label class="form-label" style="font-weight: 500; color: #2d3748; margin-bottom: 0.5rem;">
-                            <i class="fa fa-cloud-upload" style="color: #667eea; margin-right: 0.5rem;"></i> Tambah Lampiran Baru
-                        </label>
-                        <input type="file" name="attachments[]" class="form-control @error('attachments') is-invalid @enderror" id="attachmentsInput" multiple style="border-radius: 8px; border: 1px solid #e2e8f0; padding: 0.75rem; font-size: 0.95rem;">
-                        <small class="text-muted" style="margin-top: 0.25rem; display: block;"><i class="fa fa-info-circle"></i> Anda dapat memilih beberapa file sekaligus</small>
-                        @error('attachments')
                             <small class="text-danger" style="margin-top: 0.25rem; display: block;"><i class="fa fa-times-circle"></i> {{ $message }}</small>
                         @enderror
                     </div>
@@ -187,14 +152,7 @@
                     <h6 style="font-weight: 500; color: #2d3748; margin-bottom: 0.5rem;">
                         <i class="fa fa-align-left" style="color: #667eea;"></i> Konten
                     </h6>
-                    <p style="font-size: 0.9rem; color: #4a5568; margin: 0;">Isi dengan informasi lengkap dan terstruktur. Anda bisa menggunakan format teks biasa.</p>
-                </div>
-
-                <div style="margin-bottom: 1.5rem;">
-                    <h6 style="font-weight: 500; color: #2d3748; margin-bottom: 0.5rem;">
-                        <i class="fa fa-paperclip" style="color: #667eea;"></i> Lampiran
-                    </h6>
-                    <p style="font-size: 0.9rem; color: #4a5568; margin: 0;">Tambahkan dokumen, PDF, atau file pendukung lainnya. Ukuran file maksimal 10MB.</p>
+                    <p style="font-size: 0.9rem; color: #4a5568; margin: 0;">Gunakan editor WYSIWYG untuk menulis konten. Anda bisa upload gambar, video, PDF, dan format teks langsung di editor.</p>
                 </div>
 
                 <div style="background: white; border-left: 4px solid #667eea; padding: 1rem; border-radius: 6px;">
@@ -221,3 +179,118 @@
     });
 </script>
 @endsection
+
+@push('scripts')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#contentInput').summernote({
+        height: 400,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+            ['mybutton', ['uploadFile']]
+        ],
+        buttons: {
+            uploadFile: function(context) {
+                var ui = $.summernote.ui;
+                var button = ui.button({
+                    contents: '<i class="fa fa-file-pdf-o"/> Upload PDF/File',
+                    tooltip: 'Upload PDF atau File',
+                    click: function() {
+                        var input = document.createElement('input');
+                        input.type = 'file';
+                        input.accept = '.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar';
+                        input.onchange = function() {
+                            if (this.files && this.files[0]) {
+                                uploadFile(this.files[0]);
+                            }
+                        };
+                        input.click();
+                    }
+                });
+                return button.render();
+            }
+        },
+        callbacks: {
+            onImageUpload: function(files) {
+                for(let i = 0; i < files.length; i++) {
+                    uploadImage(files[i]);
+                }
+            },
+            onDrop: function(e) {
+                e.preventDefault();
+                var files = e.originalEvent.dataTransfer.files;
+                for(let i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    if (file.type.startsWith('image/')) {
+                        uploadImage(file);
+                    } else {
+                        uploadFile(file);
+                    }
+                }
+            }
+        }
+    });
+    
+    function uploadImage(file) {
+        let data = new FormData();
+        data.append('file', file);
+        data.append('_token', '{{ csrf_token() }}');
+        
+        $.ajax({
+            url: '{{ url("/admin/pages/upload-image") }}',
+            method: 'POST',
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                $('#contentInput').summernote('insertImage', response.location);
+            },
+            error: function(xhr) {
+                alert('Upload gagal: ' + (xhr.responseJSON?.error || 'Unknown error'));
+            }
+        });
+    }
+    
+    function uploadFile(file) {
+        let data = new FormData();
+        data.append('file', file);
+        data.append('_token', '{{ csrf_token() }}');
+        
+        $.ajax({
+            url: '{{ url("/admin/pages/upload-media") }}',
+            method: 'POST',
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                var fileName = file.name;
+                var fileExt = fileName.split('.').pop().toLowerCase();
+                var icon = 'fa-file';
+                
+                if (fileExt === 'pdf') icon = 'fa-file-pdf-o';
+                else if (['doc', 'docx'].includes(fileExt)) icon = 'fa-file-word-o';
+                else if (['xls', 'xlsx'].includes(fileExt)) icon = 'fa-file-excel-o';
+                else if (['ppt', 'pptx'].includes(fileExt)) icon = 'fa-file-powerpoint-o';
+                else if (['zip', 'rar'].includes(fileExt)) icon = 'fa-file-archive-o';
+                
+                var fileLink = '<a href="' + response.location + '" target="_blank" class="btn btn-primary btn-sm">' +
+                              '<i class="fa ' + icon + '"></i> ' + fileName + '</a> ';
+                $('#contentInput').summernote('pasteHTML', fileLink);
+            },
+            error: function(xhr) {
+                alert('Upload gagal: ' + (xhr.responseJSON?.error || 'Unknown error'));
+            }
+        });
+    }
+});
+</script>
+@endpush

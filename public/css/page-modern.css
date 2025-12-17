@@ -1,0 +1,535 @@
+/* Modern Page Template Styles */
+
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.page-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.page-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.page-meta-icon {
+    color: #667eea;
+}
+
+/* Content Area */
+.page-content-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    line-height: 1.75;
+}
+
+.page-content-card p {
+    margin-bottom: 1rem;
+    color: #374151;
+    font-size: 1rem;
+}
+
+.page-content-card h1,
+.page-content-card h2,
+.page-content-card h3,
+.page-content-card h4,
+.page-content-card h5,
+.page-content-card h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #1a202c;
+}
+
+.page-content-card h1 { font-size: 2rem; }
+.page-content-card h2 { font-size: 1.75rem; }
+.page-content-card h3 { font-size: 1.5rem; }
+.page-content-card h4 { font-size: 1.25rem; }
+.page-content-card h5 { font-size: 1.125rem; }
+.page-content-card h6 { font-size: 1rem; }
+
+.page-content-card ul,
+.page-content-card ol {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+.page-content-card li {
+    margin-bottom: 0.5rem;
+}
+
+.page-content-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.page-content-card a {
+    color: #667eea;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.page-content-card a:hover {
+    color: #5568d3;
+    text-decoration: underline;
+}
+
+/* PDF and File Link Buttons */
+.page-content-card a.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white !important;
+    border-radius: 8px;
+    text-decoration: none !important;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+    margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.page-content-card a.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #5568d3 0%, #653a8a 100%);
+}
+
+.page-content-card a.btn i {
+    font-size: 1.1em;
+}
+
+.page-content-card a.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.page-content-card a.btn-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.page-content-card a.btn-info {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+    box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
+}
+
+.page-content-card a.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.page-content-card a:hover {
+    color: #764ba2;
+}
+
+.page-content-card blockquote {
+    border-left: 4px solid #667eea;
+    padding-left: 1rem;
+    margin: 1rem 0;
+    font-style: italic;
+    color: #64748b;
+}
+
+.page-content-card table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.page-content-card table th,
+.page-content-card table td {
+    border: 1px solid #e5e7eb;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.page-content-card table th {
+    background: #f8fafc;
+    font-weight: 600;
+}
+
+.page-content-card video,
+.page-content-card audio,
+.page-content-card iframe {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.page-content-card pre {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.page-content-card code {
+    background: #f1f5f9;
+    color: #e11d48;
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    font-size: 0.875em;
+}
+
+.page-content-card pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+}
+
+/* Attachments Section */
+.attachments-section {
+    margin-top: 3rem;
+}
+
+.attachments-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.attachments-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin: 0;
+}
+
+.attachments-header .fa {
+    color: #667eea;
+    font-size: 1.5rem;
+}
+
+.attachments-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+/* Image Attachment */
+.attachment-image {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.attachment-image:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -2px rgba(0, 0, 0, 0.15);
+}
+
+.attachment-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.attachment-caption {
+    padding: 1rem;
+    background: #f8fafc;
+    font-size: 0.875rem;
+    color: #64748b;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* PDF Viewer */
+.attachment-pdf {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.attachment-pdf-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.attachment-pdf-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+}
+
+.attachment-pdf-title .fa {
+    font-size: 1.5rem;
+}
+
+.btn-download {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-download:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+.attachment-pdf iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    display: block;
+}
+
+/* Video Attachment */
+.attachment-video {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.attachment-video video {
+    width: 100%;
+    max-height: 560px;
+    display: block;
+}
+
+.attachment-video-caption {
+    padding: 1rem 1.5rem;
+    background: #f8fafc;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Audio Attachment */
+.attachment-audio {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.attachment-audio-title {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.attachment-audio-title .fa {
+    font-size: 1.25rem;
+}
+
+.attachment-audio audio {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* File Download Card */
+.attachment-file {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 1rem;
+}
+
+.attachment-file:hover {
+    border-color: #667eea;
+    box-shadow: 0 8px 16px -4px rgba(102, 126, 234, 0.2);
+    transform: translateX(4px);
+    text-decoration: none;
+}
+
+.attachment-file-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.attachment-file-icon .fa {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.attachment-file-info {
+    flex: 1;
+}
+
+.attachment-file-name {
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 0.25rem;
+    word-break: break-word;
+}
+
+.attachment-file-meta {
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.attachment-file-action {
+    color: #667eea;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+/* Link Cards */
+.attachment-link {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #fbbf24;
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 1rem;
+}
+
+.attachment-link:hover {
+    box-shadow: 0 8px 16px -4px rgba(251, 191, 36, 0.3);
+    transform: translateX(4px);
+    text-decoration: none;
+}
+
+.attachment-link-icon {
+    width: 48px;
+    height: 48px;
+    background: #fbbf24;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.attachment-link-icon .fa {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.attachment-link-info {
+    flex: 1;
+}
+
+.attachment-link-title {
+    font-weight: 600;
+    color: #92400e;
+    margin-bottom: 0.25rem;
+}
+
+.attachment-link-url {
+    font-size: 0.875rem;
+    color: #b45309;
+    word-break: break-all;
+}
+
+.attachment-link-action {
+    color: #92400e;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-container {
+        padding: 1rem;
+    }
+
+    .page-title {
+        font-size: 1.875rem;
+    }
+
+    .page-content-card {
+        padding: 1.5rem;
+    }
+
+    .attachment-pdf iframe {
+        height: 400px;
+    }
+
+    .attachment-file,
+    .attachment-link {
+        padding: 1rem;
+    }
+
+    .attachment-file-icon,
+    .attachment-link-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .attachment-file-icon .fa,
+    .attachment-link-icon .fa {
+        font-size: 1.25rem;
+    }
+}
+
+/* Empty State */
+.no-attachments {
+    text-align: center;
+    padding: 2rem;
+    color: #94a3b8;
+    font-style: italic;
+}

@@ -76,18 +76,10 @@
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="content">Konten</label>
+                    <label for="content">Konten <span class="text-danger">*</span></label>
                     <textarea name="content" id="content" class="form-control @error('content') is-invalid @enderror" rows="8">{{ old('content') }}</textarea>
+                    <small class="text-muted">Gunakan editor untuk menulis konten dan upload gambar/file langsung di dalam konten</small>
                     @error('content')
-                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="form-group mb-4">
-                    <label for="attachments">Lampiran (boleh lebih dari satu)</label>
-                    <input type="file" name="attachments[]" id="attachments" class="form-control @error('attachments') is-invalid @enderror" multiple>
-                    <small class="text-muted">Anda dapat memilih lebih dari satu file</small>
-                    @error('attachments')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
@@ -112,12 +104,126 @@
                 <p><strong>Kategori:</strong> Pilih kategori konten.</p>
                 <p><strong>Judul:</strong> Judul halaman yang akan ditampilkan.</p>
                 <p><strong>Slug:</strong> URL-friendly identifier. Biarkan kosong untuk otomatis dari judul.</p>
-                <p><strong>Konten:</strong> Isi konten halaman.</p>
-                <p><strong>Lampiran:</strong> Upload file pendukung (PDF, gambar, dll).</p>
+                <p><strong>Konten:</strong> Gunakan editor WYSIWYG untuk menulis konten. Anda bisa upload gambar, video, PDF, format teks, tambahkan link, dan lainnya langsung di editor.</p>
             </div>
         </div>
     </div>
 </div>
 
 @endsection
+
+@push('scripts')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#content').summernote({
+        height: 400,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+            ['mybutton', ['uploadFile']]
+        ],
+        buttons: {
+            uploadFile: function(context) {
+                var ui = $.summernote.ui;
+                var button = ui.button({
+                    contents: '<i class="fa fa-file-pdf-o"/> Upload PDF/File',
+                    tooltip: 'Upload PDF atau File',
+                    click: function() {
+                        var input = document.createElement('input');
+                        input.type = 'file';
+                        input.accept = '.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar';
+                        input.onchange = function() {
+                            if (this.files && this.files[0]) {
+                                uploadFile(this.files[0]);
+                            }
+                        };
+                        input.click();
+                    }
+                });
+                return button.render();
+            }
+        },
+        callbacks: {
+            onImageUpload: function(files) {
+                for(let i = 0; i < files.length; i++) {
+                    uploadImage(files[i]);
+                }
+            },
+            onDrop: function(e) {
+                e.preventDefault();
+                var files = e.originalEvent.dataTransfer.files;
+                for(let i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    if (file.type.startsWith('image/')) {
+                        uploadImage(file);
+                    } else {
+                        uploadFile(file);
+                    }
+                }
+            }
+        }
+    });
+    
+    function uploadImage(file) {
+        let data = new FormData();
+        data.append('file', file);
+        data.append('_token', '{{ csrf_token() }}');
+        
+        $.ajax({
+            url: '{{ url("/admin/pages/upload-image") }}',
+            method: 'POST',
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                $('#content').summernote('insertImage', response.location);
+            },
+            error: function(xhr) {
+                alert('Upload gagal: ' + (xhr.responseJSON?.error || 'Unknown error'));
+            }
+        });
+    }
+    
+    function uploadFile(file) {
+        let data = new FormData();
+        data.append('file', file);
+        data.append('_token', '{{ csrf_token() }}');
+        
+        $.ajax({
+            url: '{{ url("/admin/pages/upload-media") }}',
+            method: 'POST',
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                var fileName = file.name;
+                var fileExt = fileName.split('.').pop().toLowerCase();
+                var icon = 'fa-file';
+                
+                if (fileExt === 'pdf') icon = 'fa-file-pdf-o';
+                else if (['doc', 'docx'].includes(fileExt)) icon = 'fa-file-word-o';
+                else if (['xls', 'xlsx'].includes(fileExt)) icon = 'fa-file-excel-o';
+                else if (['ppt', 'pptx'].includes(fileExt)) icon = 'fa-file-powerpoint-o';
+                else if (['zip', 'rar'].includes(fileExt)) icon = 'fa-file-archive-o';
+                
+                var fileLink = '<a href="' + response.location + '" target="_blank" class="btn btn-primary btn-sm">' +
+                              '<i class="fa ' + icon + '"></i> ' + fileName + '</a> ';
+                $('#content').summernote('pasteHTML', fileLink);
+            },
+            error: function(xhr) {
+                alert('Upload gagal: ' + (xhr.responseJSON?.error || 'Unknown error'));
+            }
+        });
+    }
+});
+</script>
+@endpush
 

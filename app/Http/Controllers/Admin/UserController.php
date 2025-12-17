@@ -32,7 +32,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6',
-            'role' => 'required|in:kaprodi,superadmin',
+            'role' => 'required|in:kaprodi,superadmin,universitas',
             'program_id' => 'nullable|exists:programs,id',
         ]);
 
@@ -63,7 +63,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,'.$user->id,
             'password' => 'nullable|string|min:6',
-            'role' => 'required|in:kaprodi,superadmin',
+            'role' => 'required|in:kaprodi,superadmin,universitas',
             'program_id' => 'nullable|exists:programs,id',
         ]);
 

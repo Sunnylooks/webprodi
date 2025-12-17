@@ -3,6 +3,16 @@
 @section('title', 'Login')
 @section('body_class', 'page-login')
 
+@push('styles')
+<style>
+  /* Hide Program Studi dropdown and Login button on login page */
+  .page-login .nav-prodi-dropdown,
+  .page-login .nav-login-item {
+    display: none !important;
+  }
+</style>
+@endpush
+
 @section('content')
 <div class="login-page">
   <div class="login-card">

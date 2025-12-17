@@ -64,6 +64,7 @@
                 <option value="">Pilih Role</option>
                 <option value="kaprodi" {{ old('role', $user->role) === 'kaprodi' ? 'selected' : '' }}>Kaprodi</option>
                 <option value="superadmin" {{ old('role', $user->role) === 'superadmin' ? 'selected' : '' }}>Super Admin</option>
+                <option value="universitas" {{ old('role', $user->role) === 'universitas' ? 'selected' : '' }}>Universitas (View Only)</option>
             </select>
             @error('role')
                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -111,6 +112,9 @@ function toggleProgramField() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', toggleProgramField);
+// Call on page load to show program field if role is kaprodi
+document.addEventListener('DOMContentLoaded', function() {
+    toggleProgramField();
+});
 </script>
 @endsection

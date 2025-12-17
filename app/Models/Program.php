@@ -15,6 +15,7 @@ class Program extends Model
         'faculty',
         'description',
         'banner_image',
+        'home_content',
     ];
 
     public function pages()

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Attachment;
 use App\Models\Program;
 use App\Models\ProgramPage;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -38,9 +39,12 @@ class ProgramPageController extends Controller
         $programs = $user->role === 'superadmin'
             ? Program::orderBy('name')->get()
             : Program::where('id', $user->program_id)->get();
-        $categories = [
-            'SOP & Tata Kelola', 'Profil', 'Informasi', 'Panduan', 'Perkuliahan', 'Formulir', 'Mahasiswa', 'Survey', 'Data TI'
-        ];
+        
+        $selectedProgramId = $request->filled('program_id') ? (int)$request->input('program_id') : ($user->role === 'kaprodi' ? $user->program_id : null);
+        $categories = $selectedProgramId 
+            ? Category::where('program_id', $selectedProgramId)->orderBy('sort_order')->orderBy('name')->pluck('name')->toArray()
+            : [];
+            
         return view('admin.pages.index', compact('pages','programs','categories'));
     }
 
@@ -50,9 +54,12 @@ class ProgramPageController extends Controller
         $programs = $user->role === 'superadmin'
             ? Program::orderBy('name')->get()
             : Program::where('id', $user->program_id)->get();
-        $categories = [
-            'SOP & Tata Kelola', 'Profil', 'Informasi', 'Panduan', 'Perkuliahan', 'Formulir', 'Mahasiswa', 'Survey', 'Data TI'
-        ];
+        
+        $programId = $user->role === 'kaprodi' ? $user->program_id : ($programs->first()?->id ?? null);
+        $categories = $programId
+            ? Category::where('program_id', $programId)->orderBy('sort_order')->orderBy('name')->pluck('name')->toArray()
+            : [];
+            
         return view('admin.pages.create', compact('programs', 'categories'));
     }
 
@@ -122,9 +129,9 @@ class ProgramPageController extends Controller
         $programs = $user->role === 'superadmin'
             ? Program::orderBy('name')->get()
             : Program::where('id', $user->program_id)->get();
-        $categories = [
-            'SOP & Tata Kelola', 'Profil', 'Informasi', 'Panduan', 'Perkuliahan', 'Formulir', 'Mahasiswa', 'Survey', 'Data TI'
-        ];
+        
+        $categories = Category::where('program_id', $page->program_id)->orderBy('sort_order')->orderBy('name')->pluck('name')->toArray();
+        
         return view('admin.pages.edit', compact('page','programs','categories'));
     }
 
@@ -208,4 +215,65 @@ class ProgramPageController extends Controller
         $page->delete();
         return redirect('/admin/pages');
     }
+
+    /**
+     * Upload image from TinyMCE editor
+     */
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|image|max:5120', // max 5MB
+        ]);
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $uploadDir = public_path('uploads/editor');
+            
+            if (!is_dir($uploadDir)) {
+                @mkdir($uploadDir, 0775, true);
+            }
+
+            $filename = uniqid('img_') . '.' . $file->getClientOriginalExtension();
+            $file->move($uploadDir, $filename);
+
+            return response()->json([
+                'location' => asset('uploads/editor/' . $filename)
+            ]);
+        }
+
+        return response()->json(['error' => 'No file uploaded'], 400);
+    }
+
+    /**
+     * Upload media (video, audio, pdf) from TinyMCE editor
+     */
+    public function uploadMedia(Request $request)
+    {
+        try {
+            $request->validate([
+                'file' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,mp4,avi,mov,wmv,mp3,wav|max:51200', // max 50MB
+            ]);
+
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $uploadDir = public_path('uploads/editor');
+                
+                if (!is_dir($uploadDir)) {
+                    @mkdir($uploadDir, 0775, true);
+                }
+
+                $filename = uniqid('media_') . '.' . $file->getClientOriginalExtension();
+                $file->move($uploadDir, $filename);
+
+                return response()->json([
+                    'location' => asset('uploads/editor/' . $filename)
+                ]);
+            }
+
+            return response()->json(['error' => 'No file uploaded'], 400);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }
+

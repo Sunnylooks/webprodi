@@ -50,9 +50,13 @@
                     <td><strong>{{ $user->name }}</strong></td>
                     <td>{{ $user->email }}</td>
                     <td>
-                        <span class="badge badge-{{ $user->role === 'superadmin' ? 'danger' : 'warning' }}">
-                            {{ $user->role === 'superadmin' ? 'Super Admin' : 'Kaprodi' }}
-                        </span>
+                        @if($user->role === 'superadmin')
+                            <span class="badge badge-danger">Super Admin</span>
+                        @elseif($user->role === 'kaprodi')
+                            <span class="badge badge-warning">Kaprodi</span>
+                        @elseif($user->role === 'universitas')
+                            <span class="badge badge-info">Universitas</span>
+                        @endif
                     </td>
                     <td>{{ $user->program?->name ?? '-' }}</td>
                     <td>
@@ -75,6 +79,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
 </div>
 
 <nav aria-label="Page navigation">

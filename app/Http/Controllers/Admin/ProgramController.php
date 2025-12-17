@@ -66,6 +66,57 @@ class ProgramController extends Controller
         return redirect('/admin/programs');
     }
 
+    public function editHomePage(Request $request)
+    {
+        $user = Auth::user();
+        
+        if ($user->role === 'superadmin') {
+            $programs = Program::orderBy('name')->get();
+            $selectedProgramId = $request->get('program_id');
+            
+            if ($selectedProgramId) {
+                $program = Program::findOrFail($selectedProgramId);
+            } else {
+                $program = $programs->first();
+            }
+            
+            return view('admin.programs.edit-home', compact('program', 'programs'));
+        }
+        
+        $program = Program::findOrFail($user->program_id);
+        return view('admin.programs.edit-home', compact('program'));
+    }
+
+    public function updateHomePage(Request $request)
+    {
+        $user = Auth::user();
+        
+        $data = $request->validate([
+            'home_content' => 'nullable|string',
+            'program_id' => 'nullable|exists:programs,id',
+        ]);
+        
+        if ($user->role === 'superadmin') {
+            $programId = $request->input('program_id');
+            if (!$programId) {
+                return redirect()->back()->with('error', 'Program harus dipilih!');
+            }
+            $program = Program::findOrFail($programId);
+        } elseif ($user->role === 'kaprodi') {
+            $program = Program::findOrFail($user->program_id);
+        } else {
+            abort(403);
+        }
+        
+        $program->update(['home_content' => $data['home_content']]);
+        
+        $redirectUrl = $user->role === 'superadmin' 
+            ? route('admin.programs.edit-home', ['program_id' => $program->id])
+            : route('admin.programs.edit-home');
+        
+        return redirect($redirectUrl)->with('success', 'Home page berhasil diupdate!');
+    }
+
     protected function authorizeAdmin(): void
     {
         if (Auth::user()?->role !== 'superadmin') {

@@ -58,6 +58,13 @@
                         <span>Subpages</span>
                     </div>
 
+                    @if(auth()->check() && in_array(auth()->user()->role, ['superadmin', 'kaprodi']))
+                        <div class="nav-item {{ Request::is('admin/categories*') ? 'active' : '' }}" onclick="window.location='{{ url('/admin/categories') }}'">
+                            <i class="fa fa-tags"></i>
+                            <span>Kategori</span>
+                        </div>
+                    @endif
+
                     <div style="padding: 10px 0; color: rgba(255,255,255,0.5); font-size: 11px; padding-left: 20px; text-transform: uppercase; margin-top: 10px;">Account</div>
                     
                     <div class="nav-item" onclick="document.getElementById('logoutForm').submit()">
@@ -102,5 +109,6 @@
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/admin-animations.js') }}"></script>
+    @stack('scripts')
 </body>
 </html>

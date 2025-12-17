@@ -18,9 +18,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(CategorySeeder::class);
         $this->call(ProgramSeeder::class);
 
-        $super = User::firstOrCreate(
+        User::firstOrCreate(
             ['email' => 'admin@webprodi.test'],
             [
                 'name' => 'Super Admin',
@@ -29,17 +30,40 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        $inf = Program::where('slug', 'informatika')->first();
-        if ($inf) {
-            User::firstOrCreate(
-                ['email' => 'kaprodi.informatika@webprodi.test'],
-                [
-                    'name' => $inf->name,
-                    'password' => Hash::make('kaprodi123'),
-                    'role' => 'kaprodi',
-                    'program_id' => $inf->id,
-                ]
-            );
+        // Create kaprodi for all programs
+        $programSlugs = [
+            'informatika' => 'Kaprodi Informatika',
+            'management' => 'Kaprodi Management',
+            'accounting' => 'Kaprodi Akuntansi',
+            'pariwisata' => 'Kaprodi Pariwisata',
+            'dkv' => 'Kaprodi DKV',
+            'arsitektur' => 'Kaprodi Arsitektur',
+            'k3' => 'Kaprodi K3',
+            'fisika-medis' => 'Kaprodi Fisika Medis',
+        ];
+
+        foreach ($programSlugs as $slug => $name) {
+            $program = Program::where('slug', $slug)->first();
+            if ($program) {
+                User::firstOrCreate(
+                    ['email' => "kaprodi.{$slug}@webprodi.test"],
+                    [
+                        'name' => $name,
+                        'password' => Hash::make('kaprodi123'),
+                        'role' => 'kaprodi',
+                        'program_id' => $program->id,
+                    ]
+                );
+            }
         }
+
+        User::firstOrCreate(
+            ['email' => 'universitas@webprodi.test'],
+            [
+                'name' => 'User Universitas',
+                'password' => Hash::make('universitas123'),
+                'role' => 'universitas',
+            ]
+        );
     }
 }

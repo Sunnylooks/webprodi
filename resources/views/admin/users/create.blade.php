@@ -63,6 +63,7 @@
                 <option value="">Pilih Role</option>
                 <option value="kaprodi" {{ old('role') === 'kaprodi' ? 'selected' : '' }}>Kaprodi</option>
                 <option value="superadmin" {{ old('role') === 'superadmin' ? 'selected' : '' }}>Super Admin</option>
+                <option value="universitas" {{ old('role') === 'universitas' ? 'selected' : '' }}>Universitas (View Only)</option>
             </select>
             @error('role')
                 <div class="invalid-feedback d-block">{{ $message }}</div>

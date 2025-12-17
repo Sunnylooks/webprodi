@@ -14,7 +14,7 @@ class ProgramSeeder extends Seeder
         $programs = [
             ['name' => 'Informatika', 'slug' => 'informatika', 'faculty' => 'Fakultas Teknologi dan Informasi', 'description' => 'Program studi yang mempelajari ilmu komputer, pemrograman, dan teknologi informasi.'],
             ['name' => 'Management', 'slug' => 'management', 'faculty' => 'Fakultas Ekonomi dan Bisnis', 'description' => 'Manajemen bisnis, kepemimpinan, dan strategi organisasi.'],
-            ['name' => 'Accounting', 'slug' => 'accounting', 'faculty' => 'Fakultas Ekonomi dan Bisnis', 'description' => 'Akuntansi, keuangan, perpajakan, dan audit.'],
+            ['name' => 'Akuntansi', 'slug' => 'accounting', 'faculty' => 'Fakultas Ekonomi dan Bisnis', 'description' => 'Akuntansi, keuangan, perpajakan, dan audit.'],
             ['name' => 'Pariwisata', 'slug' => 'pariwisata', 'faculty' => 'Fakultas Pariwisata', 'description' => 'Industri pariwisata, hospitality, dan manajemen destinasi wisata.'],
             ['name' => 'Desain Komunikasi Visual', 'slug' => 'dkv', 'faculty' => 'Fakultas Seni dan Desain', 'description' => 'Desain grafis, multimedia, branding, dan komunikasi visual.'],
             ['name' => 'Arsitektur', 'slug' => 'arsitektur', 'faculty' => 'Fakultas Teknik', 'description' => 'Perancangan bangunan, urban design, dan sustainable architecture.'],

@@ -53,10 +53,24 @@
 
                     <div style="padding: 10px 0; color: rgba(255,255,255,0.5); font-size: 11px; padding-left: 20px; text-transform: uppercase; margin-top: 10px;">Content</div>
                     
+                    @if(in_array(auth()->user()->role, ['superadmin', 'kaprodi']))
+                        <div class="nav-item {{ Request::is('admin/programs/edit-home') ? 'active' : '' }}" onclick="window.location='{{ route('admin.programs.edit-home') }}'">
+                            <i class="fa fa-home"></i>
+                            <span>Edit Home Page</span>
+                        </div>
+                    @endif
+
                     <div class="nav-item {{ Request::is('admin/pages*') ? 'active' : '' }}" onclick="window.location='{{ url('/admin/pages') }}'">
                         <i class="fa fa-file-text"></i>
                         <span>Subpages</span>
                     </div>
+
+                    @if(auth()->check() && in_array(auth()->user()->role, ['superadmin', 'kaprodi']))
+                        <div class="nav-item {{ Request::is('admin/categories*') ? 'active' : '' }}" onclick="window.location='{{ url('/admin/categories') }}'">
+                            <i class="fa fa-tags"></i>
+                            <span>Kategori</span>
+                        </div>
+                    @endif
 
                     <div style="padding: 10px 0; color: rgba(255,255,255,0.5); font-size: 11px; padding-left: 20px; text-transform: uppercase; margin-top: 10px;">Account</div>
                     
@@ -77,10 +91,7 @@
             <!-- Header -->
             <div class="admin-header">
                 <div class="admin-header-left">
-                    <div class="admin-header-search">
-                        <i class="fa fa-search"></i>
-                        <input type="text" id="globalSearch" placeholder="Cari...">
-                    </div>
+                    <!-- Search removed - using filter box instead -->
                 </div>
                 <div class="admin-header-right">
                     <span class="admin-user-info" style="margin-right: 20px; color: #333; font-weight: 500; font-size: 13px;">
@@ -106,5 +117,8 @@
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/admin-animations.js') }}"></script>
+    
+    @yield('scripts')
+    @stack('scripts')
 </body>
 </html>

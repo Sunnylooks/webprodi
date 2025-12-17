@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             User::firstOrCreate(
                 ['email' => 'kaprodi.informatika@webprodi.test'],
                 [
-                    'name' => 'Kaprodi Informatika',
+                    'name' => $inf->name,
                     'password' => Hash::make('kaprodi123'),
                     'role' => 'kaprodi',
                     'program_id' => $inf->id,

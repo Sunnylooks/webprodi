@@ -15,7 +15,6 @@ Panduan singkat untuk menjalankan aplikasi Laravel ini secara lokal.
 composer install
 
 # 2) Siapkan environment
-cp .env.example .env
 php artisan key:generate
 
 # 3) Konfigurasi database di file .env

@@ -1,0 +1,91 @@
+/* ================= LOGIN PAGE ONLY ================= */
+.page-login .tm-page-wrap.mx-auto{
+  max-width: none !important;
+}
+
+.page-login footer.tm-container-outer{
+  display: none;
+}
+
+/* BACKGROUND DENGAN FOTO UNIVERSITAS */
+.page-login .login-page{
+  min-height: calc(100vh - 90px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 28px 16px;
+
+  /* FOTO BACKGROUND */
+  background:
+    linear-gradient(
+      rgba(10, 25, 47, 0.55),
+      rgba(10, 25, 47, 0.55)
+    ),
+    url("/img/bg-matana.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* CARD LOGIN */
+.page-login .login-card{
+  width: min(980px, 100%);
+  background: #ffffff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 25px 70px rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.25);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+/* LEFT PANEL */
+.page-login .login-left{
+  padding: 42px;
+  color:#ffffff;
+  background:
+    linear-gradient(135deg, rgba(105,198,186,.95), rgba(13,110,253,.95));
+}
+
+.page-login .login-left h2{
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.page-login .login-left p{
+  opacity: .95;
+  line-height: 1.6;
+}
+
+/* RIGHT PANEL */
+.page-login .login-right{
+  padding: 42px;
+}
+
+.page-login .login-right h3{
+  font-weight: 750;
+  margin-bottom: 20px;
+}
+
+.page-login .login-input{
+  height: 46px;
+  border-radius: 14px;
+}
+
+.page-login .login-btn{
+  height: 46px;
+  border-radius: 14px;
+  font-weight: 650;
+  box-shadow: 0 10px 22px rgba(13,110,253,.25);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px){
+  .page-login .login-card{
+    grid-template-columns: 1fr;
+  }
+  .page-login .login-left{
+    display: none;
+  }
+}

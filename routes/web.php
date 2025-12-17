@@ -5,6 +5,7 @@ use App\Http\Controllers\PortalController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\ProgramController as AdminProgramController;
 use App\Http\Controllers\Admin\ProgramPageController as AdminProgramPageController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 // Root ke portal
 Route::get('/', [PortalController::class, 'portal'])->middleware('auth');
@@ -18,8 +19,18 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/p/{programSlug}', [PortalController::class, 'program']);
 Route::get('/p/{programSlug}/{pageSlug}', [PortalController::class, 'subpage']);
 
-// Admin (kaprodi dan superadmin dapat mengakses dashboard admin)
-Route::middleware('role:admin')->group(function () {
+// Admin (hanya superadmin untuk users management)
+Route::middleware('role:superadmin')->group(function () {
+    Route::get('/admin/users', [AdminUserController::class, 'index']);
+    Route::get('/admin/users/create', [AdminUserController::class, 'create']);
+    Route::post('/admin/users', [AdminUserController::class, 'store']);
+    Route::get('/admin/users/{id}/edit', [AdminUserController::class, 'edit']);
+    Route::put('/admin/users/{id}', [AdminUserController::class, 'update']);
+    Route::delete('/admin/users/{id}', [AdminUserController::class, 'destroy']);
+});
+
+// Admin (hanya kaprodi/superadmin)
+Route::middleware('role:kaprodi,program')->group(function () {
     Route::get('/admin', function () { return view('admin.index'); });
     Route::get('/admin/programs', [AdminProgramController::class, 'index']);
     Route::get('/admin/programs/create', [AdminProgramController::class, 'create']);

@@ -18,7 +18,8 @@ class RoleMiddleware
         $allowed = false;
         if ($role === 'superadmin') {
             $allowed = $user->role === 'superadmin';
-        } elseif ($role === 'kaprodi') {
+        } elseif ($role === 'kaprodi' || $role === 'admin') {
+            // Allow both superadmin and kaprodi to access admin routes
             $allowed = in_array($user->role, ['superadmin', 'kaprodi'], true);
         }
 

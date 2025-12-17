@@ -7,8 +7,8 @@ use App\Http\Controllers\Admin\ProgramController as AdminProgramController;
 use App\Http\Controllers\Admin\ProgramPageController as AdminProgramPageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 
-// Root langsung ke prodi default
-Route::get('/', [PortalController::class, 'redirectToDefault']);
+// Root ke portal
+Route::get('/', [PortalController::class, 'portal'])->middleware('auth');
 
 // Auth
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

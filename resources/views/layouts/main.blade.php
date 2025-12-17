@@ -20,6 +20,16 @@
     <link rel="stylesheet" href="{{ asset('css/flexible-utilities.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive-improvements.css') }}">
     <link rel="stylesheet" href="{{ asset('css/prodi.css') }}">
+<link rel="stylesheet" href="{{ asset('css/templatemo-style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/fullscreen.css') }}">
+<link rel="stylesheet" href="{{ asset('css/flexible-utilities.css') }}">
+<link rel="stylesheet" href="{{ asset('css/responsive-improvements.css') }}">
+<link rel="stylesheet" href="{{ asset('css/prodi.css') }}">
+
+<!-- LOGIN PAGE STYLE (BARU) -->
+<link rel="stylesheet" href="{{ asset('css/auth-login.css') }}">
+@stack('styles')
+<link rel="stylesheet" href="{{ asset('css/auth-login.css') }}">
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -27,7 +37,9 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="@yield('body_class')">
+
+
     <div class="tm-main-content" id="top">
         <div class="tm-top-bar-bg"></div>    
         <div class="tm-top-bar" id="tm-top-bar">

@@ -1,4 +1,4 @@
-@extends('layouts.admin-no-search')
+@extends('layouts.admin')
 
 @section('title', 'Kategori')
 
@@ -115,8 +115,8 @@
     </div>
 </div>
 
-<div class="mt-3">
-    {{ $categories->links() }}
-</div>
+<nav aria-label="Page navigation" class="mt-3">
+    {{ $categories->appends(request()->query())->links('pagination::bootstrap-4') }}
+</nav>
 
 @endsection

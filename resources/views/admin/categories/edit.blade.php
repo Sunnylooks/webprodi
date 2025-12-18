@@ -1,4 +1,4 @@
-@extends('layouts.admin-no-search')
+@extends('layouts.admin')
 
 @section('title', 'Edit Kategori')
 

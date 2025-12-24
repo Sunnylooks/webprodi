@@ -42,7 +42,7 @@
                     <i class="fa fa-file-text"></i>
                 </div>
             </div>
-            <div class="metric-label">Total Subpage</div>
+            <div class="metric-label">Total Subpages</div>
             <div class="metric-value">{{ $pageCount }}</div>
         </div>
     </div>

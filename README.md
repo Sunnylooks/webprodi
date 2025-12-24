@@ -47,6 +47,19 @@ php artisan db:seed
 php artisan migrate:fresh --seed
 ```
 
+**Data yang akan dibuat:**
+- 1 Super Admin (admin@webprodi.test / admin123)
+- 8 Kaprodi untuk setiap program (kaprodi.{slug}@webprodi.test / kaprodi123)
+- 1 User Universitas (universitas@webprodi.test / universitas123)
+- 8 Program studi (Informatika, Management, Akuntansi, dll)
+- 9 Kategori untuk setiap program (SOP & Tata Kelola, Profil, Informasi, dll)
+- Sample subpages untuk setiap kategori
+
+**Seeder yang dijalankan:**
+1. `CategorySeeder` - Membuat kategori untuk setiap program
+2. `ProgramSeeder` - Membuat program studi dan sample pages
+3. `DatabaseSeeder` - Membuat user accounts
+
 Tips:
 - Pastikan koneksi database di `.env` sudah benar sebelum menjalankan seeding.
 - Anda bisa menambahkan atau mengubah seeder di `database/seeders` sesuai kebutuhan.

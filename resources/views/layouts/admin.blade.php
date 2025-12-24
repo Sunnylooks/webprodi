@@ -60,6 +60,11 @@
                         </div>
                     @endif
 
+                    <div class="nav-item {{ Request::is('admin/content*') ? 'active' : '' }}" onclick="window.location='{{ url('/admin/content') }}'">
+                        <i class="fa fa-edit"></i>
+                        <span>Manage Content</span>
+                    </div>
+
                     <div class="nav-item {{ Request::is('admin/pages*') ? 'active' : '' }}" onclick="window.location='{{ url('/admin/pages') }}'">
                         <i class="fa fa-file-text"></i>
                         <span>Subpages</span>

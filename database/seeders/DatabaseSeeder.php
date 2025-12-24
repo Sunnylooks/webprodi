@@ -57,13 +57,14 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        User::firstOrCreate(
-            ['email' => 'universitas@webprodi.test'],
-            [
-                'name' => 'User Universitas',
-                'password' => Hash::make('universitas123'),
-                'role' => 'universitas',
-            ]
-        );
+        // User universitas role removed - portal now accessible by guest
+        // User::firstOrCreate(
+        //     ['email' => 'universitas@webprodi.test'],
+        //     [
+        //         'name' => 'User Universitas',
+        //         'password' => Hash::make('universitas123'),
+        //         'role' => 'universitas',
+        //     ]
+        // );
     }
 }

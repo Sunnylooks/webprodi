@@ -9,8 +9,9 @@
         <div class="portal-header">
             <div class="header-content">
                 <h1 class="portal-title">Portal Program Studi</h1>
-                <p class="portal-subtitle">Pilih program studi atau akses dashboard admin</p>
+                <p class="portal-subtitle">Pilih program studi @auth atau akses dashboard admin @endauth</p>
             </div>
+            @auth
             <div class="header-action">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
@@ -20,6 +21,7 @@
                     </button>
                 </form>
             </div>
+            @endauth
         </div>
 
         <!-- Cards Grid -->
@@ -51,6 +53,7 @@
             @endforeach
 
             {{-- Admin Card - hanya untuk superadmin dan kaprodi --}}
+            @auth
             @if(in_array(auth()->user()->role, ['superadmin', 'kaprodi']))
             <a href="/admin" class="card-link">
                 <div class="program-card admin-card">
@@ -70,6 +73,7 @@
                 </div>
             </a>
             @endif
+            @endauth
         </div>
     </div>
 </section>

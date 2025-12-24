@@ -7,20 +7,19 @@ use App\Http\Controllers\Admin\ProgramController as AdminProgramController;
 use App\Http\Controllers\Admin\ProgramPageController as AdminProgramPageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\ContentController as AdminContentController;
 
-// Root ke portal
-Route::get('/', [PortalController::class, 'portal'])->middleware('auth');
+// Root ke portal (GUEST ACCESS - No login required)
+Route::get('/', [PortalController::class, 'portal']);
 
 // Auth
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Portal per prodi (semua role termasuk universitas bisa akses)
-Route::middleware('auth')->group(function () {
-    Route::get('/p/{programSlug}', [PortalController::class, 'program']);
-    Route::get('/p/{programSlug}/{pageSlug}', [PortalController::class, 'subpage']);
-});
+// Portal per prodi (GUEST ACCESS - View only, no login required)
+Route::get('/p/{programSlug}', [PortalController::class, 'program']);
+Route::get('/p/{programSlug}/{pageSlug}', [PortalController::class, 'subpage']);
 
 // Admin (hanya superadmin untuk users management)
 Route::middleware('role:superadmin')->group(function () {
@@ -41,6 +40,11 @@ Route::middleware('role:kaprodi,program')->group(function () {
     // Edit home page (for kaprodi and superadmin) - MUST be before {id} routes
     Route::get('/admin/programs/edit-home', [AdminProgramController::class, 'editHomePage'])->name('admin.programs.edit-home');
     Route::put('/admin/programs/update-home', [AdminProgramController::class, 'updateHomePage'])->name('admin.programs.update-home');
+    
+    // Content Management
+    Route::get('/admin/content', [AdminContentController::class, 'index'])->name('admin.content.index');
+    Route::get('/admin/content/{id}/edit', [AdminContentController::class, 'edit'])->name('admin.content.edit');
+    Route::put('/admin/content/{id}', [AdminContentController::class, 'update'])->name('admin.content.update');
     
     Route::post('/admin/programs', [AdminProgramController::class, 'store']);
     Route::get('/admin/programs/{id}/edit', [AdminProgramController::class, 'edit']);
